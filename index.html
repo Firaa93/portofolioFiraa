@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firaa Portfolio</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 100px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.5s;
+        }
+
+        header.sticky {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 100px;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navigation a:hover {
+            color: #00d9ff;
+        }
+
+        .main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 100px;
+            background: #000;
+            gap: 80px;
+        }
+
+        .main .content {
+            flex: 1;
+            max-width: 700px;
+        }
+
+        .profile-section {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            flex-shrink: 0;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 60px rgba(255, 87, 87, 0.6);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-photo::before {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255, 87, 87, 0.4), transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .main h2 {
+            font-size: 3.5em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .main h2 span {
+            color: #ff5757;
+            font-weight: 600;
+            display: block;
+        }
+
+        .main h3 {
+            font-size: 2.2em;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .main h3 span {
+            color: #ff5757;
+        }
+
+        .main p {
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 35px;
+            font-size: 1.05em;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: transparent;
+            color: #ff5757;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #ff5757;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            margin-top: 10px;
+            width: fit-content;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ff5757;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 87, 87, 0.4);
+        }
+
+        .media-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .media-icons a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ff5757;
+            border-radius: 50%;
+            color: #ff5757;
+            font-size: 1.3em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .media-icons a:hover {
+            background: #ff5757;
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 87, 87, 0.4);
+        }
+
+        section {
+            padding: 100px;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #00d9ff;
+        }
+
+        .about .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .img-card {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .img-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .content-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .paragraph-text {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .skills .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .bar {
+            margin-bottom: 30px;
+        }
+
+        .bar .info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .bar .line {
+            height: 10px;
+            background: #333;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar .line::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #00d9ff, #0099ff);
+            border-radius: 10px;
+        }
+
+        .bar .line.html::before { width: 95%; }
+        .bar .line.css::before { width: 90%; }
+        .bar .line.javascript::before { width: 80%; }
+        .bar .line.python::before { width: 85%; }
+        .bar .line.php::before { width: 90%; }
+
+        .work .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .work .card-img {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .work .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .work .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .contact .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            width: 100%;
+        }
+
+        .contact-form h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #00d9ff;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            background: #1a1a1a;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background: #ff5757;
+            color: #000;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: #ff3a3a;
+        }
+
+        .contact-info {
+            width: 100%;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #00d9ff;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .info-item:hover {
+            background: #252525;
+            transform: translateX(5px);
+        }
+
+        .info-item i {
+            font-size: 1.5em;
+            color: #00d9ff;
+            width: 40px;
+        }
+
+        .info-item span {
+            color: #ccc;
+            font-size: 1em;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+            border: 2px solid #333;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7);
+        }
+
+        .whatsapp-float i {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        footer {
+            background: #0a0a0a;
+            padding: 30px;
+            text-align: center;
+        }
+
+        @media (max-width: 991px) {
+            header, .main, section {
+                padding: 50px 30px;
+            }
+            .main {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-section {
+                margin-top: 40px;
+            }
+            .media-icons {
+                justify-content: center;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .about .content, .skills .content {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation {
+                display: none;
+            }
+
+            .profile-section {
+                width: 250px;
+                height: 250px;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navigation">
+            <a href="#main" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">Beranda</a>
+            <a href="#about"data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Tentang</a>
+            <a href="#skills" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">Keahlian</a>
+            <a href="#work" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">Portofolio</a>
+            <a href="#contact" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">Kontak</a>
+        </div>
+    </header>
+
+    <a href="https://wa.link/ouoqbr" class="whatsapp-float" target="_blank" title="Chat via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <section class="main" id="main">
+        <div class="content">
+            <h2 data-aos="fade-right" data-aos-duration="1000" data-aos-delay="700">Halo, Saya <span>Firaa</span></h2>
+            <p data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">Saya adalah seorang desainer web yang berpengalaman dalam menciptakan website yang menarik dan fungsional. Dengan keahlian dalam desain visual dan pengembangan web, saya siap membantu mewujudkan ide Anda menjadi kenyataan digital yang memukau.</p>
+            
+            <div class="media-icons">
+                <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1000"><i class="fab fa-instagram"></i></a>
+                <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1100"><i class="fab fa-github"></i></a>
+                <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1200"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="1300"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <a href="#contact" class="btn" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1400">Hubungi Saya</a>
+        </div>
+        
+        <div class="profile-section" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="500">
+            <div class="profile-photo">
+                <img src="foto_profil.png" alt="Foto Profil">
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="title reveal">
+            <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">Tentang Saya</h2>
+        </div>
+        <div class="content">
+            <div class="column col-left reveal">
+                <div class="img-card" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">
+                     <img src="prof.jpeg" alt="">
+                </div>
+            </div>
+            <div class="column col-right reveal">
+                <h2 class="content-title" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">Halo! Saya Firaa</h2>
+                <p class="paragraph-text" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="400">Saya adalah seorang pengembang web dan desainer yang antusias dalam menciptakan website yang modern, responsif, dan user-friendly. Saya aktif terlibat dalam berbagai proyek nyata untuk terus mengasah kemampuan teknis maupun kreativitas saya di dunia pengembangan web.
+
+Saya berpengalaman menangani proses pembuatan website dari tahap perencanaan hingga deployment, dengan fokus pada struktur kode yang rapi dan pengalaman pengguna yang optimal. Saya juga terus mengikuti perkembangan teknologi terbaru agar dapat menghadirkan solusi yang inovatif dan relevan..</p>
+                <a href="#skills" class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="600">Lihat Selengkapnya</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="title">
+            <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">Keahlian Saya</h2>
+        </div>
+        <div class="content">
+            <div class="column col-left">
+                <h2 class="content-title" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">Keahlian dan Pengalaman Saya</h2>
+                <p class="paragraph-text" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="300">Selama perjalanan pengembangan diri saya, saya telah membangun kompetensi dalam berbagai bahasa pemrograman dan teknologi web. Keahlian saya mencakup pengembangan front-end yang interaktif dan responsif, serta pemahaman dalam bahasa pemrograman back-end, memungkinkan saya merancang dan mengimplementasikan solusi web yang efisien dan skalabel.</p>
+                <a href="#work" class="btn" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="400">Lihat Selengkapnya</a>
+            </div>
+            <div class="column col-right">
+                <div class="bar">
+                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="100">
+                        <span>HTML</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="line html" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="140"></div>
+                </div>
+                <div class="bar">
+                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="200">
+                        <span>CSS</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="line css" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="240"></div>
+                </div>
+                <div class="bar">
+                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="300">
+                        <span>Javascript</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="line javascript" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="340"></div>
+                </div>
+                <div class="bar">
+                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="400">
+                        <span>Python</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="line python" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="440"></div>
+                </div>
+                <div class="bar">
+                    <div class="info" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="500">
+                        <span>PHP</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="line php" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="540"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="work" id="work">
+        <div class="title">
+            <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">Portofolio Saya</h2>
+        </div>
+        <div class="content">
+            <div class="card" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
+                <div class="card-img">
+                    <img src="css.png" alt="">
+                </div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="card-img">
+                    <img src="javascript.png" alt="">
+                </div>
+            </div>
+            <div class="card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="card-img">
+                    <img src="program.png" alt="">
+                </div>
+            </div>
+            <div class="card" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400">
+                <div class="card-img">
+                    <img src="python.png" alt="">
+                </div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="card-img">
+                    <img src="html.png" alt="">
+                </div>
+            </div>
+            <div class="card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
+                <div class="card-img">
+                    <img src="sql.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="title reveal">
+          <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">Hubungi Saya</h2>
+        </div>
+        <div class="content">
+          <div class="contact-info reveal" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <h3>Informasi Kontak</h3>
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <span>firaa@email.com</span>
+            </div>
+            <div class="info-item">
+              <i class="fab fa-whatsapp"></i>
+              <span>+62 821-7696-0772</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Medan, Sumatera Utara, Indonesia</span>
+            </div>
+          </div>
+          
+          <div class="contact-form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+            <h3>Kirim Pesan</h3>
+            <form id="contact-form">
+                <input type="text" id="nama" name="nama" placeholder="Nama Anda" required>
+                <input type="email" id="email" name="email" placeholder="Email Anda" required>
+                <textarea id="pesan" name="pesan" rows="5" placeholder="Tulis pesan Anda..." required></textarea>
+                <button type="submit">Kirim via WhatsApp</button>
+            </form>
+          </div>
+
+          <div class="map-container" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255252.699313269!2d98.54471017830881!3d3.642592186938224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303131cc1b189765%3A0x546c3125d8616c3!2sMedan%2C%20Kota%20Medan%2C%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1668172288344!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </section>
+  
+    <footer class="footer">
+        <span class="footer-title">Firaa</span>
+        <p>Hak Cipta @2025. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({offset:0});
+
+      window.addEventListener("scroll", function(){
+          const header = document.querySelector("header");
+          header.classList.toggle("sticky", window.scrollY > 0);
+      });
+
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+          event.preventDefault(); 
+         
+          const nama = document.getElementById('nama').value;
+          const email = document.getElementById('email').value;
+          const pesan = document.getElementById('pesan').value;
+          
+          const noHp = '6282176960772';
+
+          const messageText = `Halo, saya ${nama}.\n\nEmail: ${email}\n\nPesan saya:\n${pesan}`;
+          
+          const encodedMessage = encodeURIComponent(messageText);
+          
+          const whatsappURL = `https://api.whatsapp.com/send?phone=${noHp}&text=${encodedMessage}`;
+          
+          window.open(whatsappURL, '_blank');
+      });
+    </script>
+</body>
+</html>
